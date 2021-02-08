@@ -1,0 +1,33 @@
+function y = binary2factor(x,W)
+%   This Programe is used to finish the Inverse Mapping.
+%
+%   Input:
+%       x: input binary matrix;
+%       W: the size of Mapping
+%   Output:
+%       y: output matrix by mapped
+%
+%   Version: 1.0
+%   Author: dtkong
+%   Time: 2011.03.29
+
+if ( W == 1 )
+    y = 2*x-1;
+elseif ( W == 2 )
+    y = 1*( x(1:W:end,:) == 0 & x(2:W:end,:) == 0 ) + ...
+            1j*( x(1:W:end,:) == 0 & x(2:W:end,:) == 1 ) + ...
+                -1*( x(1:W:end,:) == 1 & x(2:W:end,:) == 1 ) + ...
+                    -1j*( x(1:W:end,:) == 1 & x(2:W:end,:) == 0 );
+elseif ( W == 3 )
+    y = 1*( x(1:W:end,:) == 0 & x(2:W:end,:) == 0 & x(3:W:end,:) == 0 ) + ...
+            (1/2+1j/2)*( x(1:W:end,:) == 0 & x(2:W:end,:) == 0 & x(3:W:end,:) == 1 ) + ...
+                1j*( x(1:W:end,:) == 0 & x(2:W:end,:) == 1 & x(3:W:end,:) == 1 ) + ...
+                    (-1/2+1j/2)*( x(1:W:end,:) == 0 & x(2:W:end,:) == 1 & x(3:W:end,:) == 0 ) + ...
+                        -1*( x(1:W:end,:) == 1 & x(2:W:end,:) == 1 & x(3:W:end,:) == 0 ) + ...
+                            (-1/2-1j/2)*( x(1:W:end,:) == 1 & x(2:W:end,:) == 1 & x(3:W:end,:) == 1 ) + ...
+                                -1j*( x(1:W:end,:) == 1 & x(2:W:end,:) == 0 & x(3:W:end,:) == 1 ) + ...
+                                    (1/2-1j/2)*( x(1:W:end,:) == 1 & x(2:W:end,:) == 0 & x(3:W:end,:) == 0 );
+else
+    error('please input W from [1 2 3]');
+end
+
